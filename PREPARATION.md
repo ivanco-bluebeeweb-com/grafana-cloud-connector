@@ -1,3 +1,30 @@
-# Grafana Cloud Connector - PREPARATION.md
+# Grafana Cloud Connector — Preparation
 
-Standard documentation for Grafana Cloud Connector in Imperal Cloud.
+**Category:** C42. Observability & APM  
+**Status:** App Preparation Complete (Genuinely Vendor-Specific)  
+**Standard:** APP_PREPARATION_STANDARD.md
+
+## 1. Паспорт коннектора
+- **Название:** Grafana Cloud Connector (`grafana-cloud-connector`)
+- **Официальный портал вендора:** https://grafana.com
+- **Базовый API:** `https://<org>.grafana.net/api`
+- **Модель аутентификации:** Grafana Service Account Token (Authorization: Bearer <token>)
+- **Назначение:** Интеграция платформы Imperal Cloud с Grafana Cloud для автоматизации предметной области: визуализация метрик Prometheus, логов Loki и трейсов Tempo в единой настраиваемой системе дашбордов.
+
+## 2. Решаемая проблема
+Когда **DevOps-инженер** сталкивается с задачей **визуализация метрик Prometheus, логов Loki и трейсов Tempo в единой настраиваемой системе дашбордов**, возникает необходимость ручного мониторинга, дублирования статусов и переключения между окнами. Это приводит к потере времени, замедлению реакции на инциденты и ошибкам ручного ввода.
+
+## 3. Роли и права доступа
+- **DevOps-инженер, дежурный специалист, системный аналитик**
+- Принцип наименьших привилегий (Least Privilege): токен запрашивает доступ только к разрешенным операциям чтения и подтвержденным действиям.
+
+## 4. Ключевые сущности
+дашборды (/dashboards/db), источники данных (/datasources), правила алертов (/v1/provisioning/alert-rules)
+
+## 5. Первичный рабочий сценарий
+`чтение метаданных дашборда -> проверка состояния подключений Prometheus/Loki -> просмотр активных алертов`.
+
+## 6. Границы коннектора
+- Изолированное хранение секретов (BYOC).
+- Никаких фиктивных методов сторонних предметных областей.
+- Деструктивные операции требуют явного подтверждения пользователя.
